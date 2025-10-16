@@ -8,6 +8,11 @@ export default class WorkoutService {
             "x-rapidapi-host": "exercisedb-api1.p.rapidapi.com"
         };
         this.dataService = new DataService();
+        
+        // Debug: Check if API key is loaded (remove this after fixing)
+        if (!import.meta.env.VITE_WORKOUT_PLANNER_API_KEY) {
+            console.error("WORKOUT API KEY NOT LOADED!");
+        }
     }
 
     // Search exercises by keyword
