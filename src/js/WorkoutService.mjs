@@ -8,11 +8,6 @@ export default class WorkoutService {
             "x-rapidapi-host": "exercisedb-api1.p.rapidapi.com"
         };
         this.dataService = new DataService();
-        
-        // Debug: Check if API key is loaded (remove this after fixing)
-        if (!import.meta.env.VITE_WORKOUT_PLANNER_API_KEY) {
-            console.error("WORKOUT API KEY NOT LOADED!");
-        }
     }
 
     // Search exercises by keyword
@@ -53,12 +48,12 @@ export default class WorkoutService {
             index === self.findIndex(e => e.exerciseId === exercise.exerciseId)
         );
         
-        // Use backup if no API results
+        // Check API results
         if (uniqueExercises.length === 0) {
-            exercises = await this.getBackupExercises(userData);
-        } else {
-            exercises = uniqueExercises.slice(0, 6);
+            throw new Error("Unable to load exercises.");
         }
+        
+        exercises = uniqueExercises.slice(0, 6);
         
         return {
             goal: userData.goal,
