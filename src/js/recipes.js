@@ -1,97 +1,94 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, alertMessage } from "./utils.mjs";
 import ApiService from "./ApiService.mjs";
 
-// Load header and footer
 loadHeaderFooter();
 
-class RecipeManager {
-    constructor() {
+
+export default class RecipeManager {
+    constructor(searchSelector, buttonSelector, resultsSelector) {
+        this.searchSelector = searchSelector;
+        this.buttonSelector = buttonSelector;
+        this.resultsSelector = resultsSelector;
         this.apiService = new ApiService();
-        this.searchInput = document.getElementById("recipe-search");
-        this.searchBtn = document.getElementById("search-btn");
-        this.resultsContainer = document.getElementById("recipe-results");
+        this.searchInput = null;
+        this.searchBtn = null;
+        this.resultsContainer = null;
     }
     
     init() {
+        loadHeaderFooter();
+        this.setupElements();
+        this.setupEventListeners();
+    }
+    setupElements() {
+        this.searchInput = document.querySelector(this.searchSelector);
+        this.searchBtn = document.querySelector(this.buttonSelector);
+        this.resultsContainer = document.querySelector(this.resultsSelector);
+
         if (!this.searchInput || !this.searchBtn || !this.resultsContainer) {
-            console.error("Elements not found in the DOM");
-            return;
+            console.error("Recipe elements not found in the DOM");
+            return false;
         }
+        return true;
+    }
+
+    setupEventListeners() {
         this.searchBtn.addEventListener("click", () => {
-            this.searchRecipes();
+            this.handleSearch();
         });
         this.searchInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
-                this.searchRecipes();
+                this.handleSearch();
             }
         });
-
-        console.log("Recipe Manager initialized!");
     }
 
-
-    async searchRecipes() {
-        //get the text
+    async handleSearch() {
         const query = this.searchInput.value.trim();
-        // Validate
         if (!query) {
-            this.showMessage("Please enter a search term");
+            alertMessage("Please enter a search term");
             return;
         }
-        this.showLoading(true);
         try {
-            const recipes = await this.apiService.searchRecipes(query, {
-                number: 6,  //number of recipes
+            const searchOptions = {
+                number: 6,
                 diet: "healthy"
-            });
-
-            this.displayRecipes(recipes);
+            };
+            
+            const recipes = await this.apiService.searchRecipes(query, searchOptions);
+            this.displayResults(recipes);
 
         } catch (error) {
             console.error("Error searching recipes:", error);
-            this.showMessage("Sorry, couldn't find recipes. Try again!");
-        } finally {
-            this.showLoading(false);
-        }
-    }
-    showMessage(message) {
-        this.resultsContainer.innerHTML = `
-            <div class="message">
-                <p>${message}</p>
-            </div>
-        `;
-    }
-
-    showLoading(show) {
-        if (show) {
-            this.resultsContainer.innerHTML = `
-                <div class="loading">
-                    <p>Loading recipes...</p>
-                </div>
-            `;
         }
     }
 
-    displayRecipes(recipes) {
+    displayResults(recipes) {
         if (!recipes || recipes.length === 0) {
-            this.showMessage("No recipes found. Try a different search!");
+            alertMessage("No recipes found. Try a different search!");
             return;
         }
 
-        const recipesHTML = recipes.map(recipe => `
+        const recipesHTML = recipes.map(recipe => this.createRecipeCard(recipe)).join("");
+        this.resultsContainer.innerHTML = recipesHTML;
+    }
+
+    createRecipeCard(recipe) {
+        const { title, image, readyInMinutes, sourceUrl } = recipe;
+        const cookTime = readyInMinutes || "30";
+        
+        return `
             <div class="recipe-card">
-                <img src="${recipe.image}" alt="${recipe.title}">
-                <h3>${recipe.title}</h3>
-                <p>Ready in ${recipe.readyInMinutes || "30"} minutes</p>
-                <button class="btn-secondary" onclick="window.open('${recipe.sourceUrl}', '_blank')">
+                <img src="${image}" alt="${title}" loading="lazy">
+                <h3>${title}</h3>
+                <p>Ready in ${cookTime} minutes</p>
+                <button class="btn-secondary" onclick="window.open('${sourceUrl}', '_blank')">
                     View Recipe
                 </button>
             </div>
-        `).join("");//to open the window in other tab
-
-        this.resultsContainer.innerHTML = recipesHTML;
+        `;
     }
 }
 
-const recipeManager = new RecipeManager();
+const recipeManager = new RecipeManager("#recipe-search", "#search-btn", "#recipe-results");
 recipeManager.init();

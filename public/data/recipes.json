@@ -1,0 +1,163 @@
+{
+  "featured_recipes": [
+    {
+      "id": "rec001",
+      "title": "Protein Power Bowl",
+      "category": "High Protein",
+      "prep_time_minutes": 15,
+      "cook_time_minutes": 0,
+      "total_time_minutes": 15,
+      "servings": 2,
+      "difficulty": "Easy",
+      "calories_per_serving": 420,
+      "protein_grams": 35,
+      "carbs_grams": 45,
+      "fat_grams": 12,
+      "fiber_grams": 8,
+      "image_url": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "ingredients": [
+        "2 cups cooked quinoa",
+        "1 cup black beans",
+        "1 grilled chicken breast",
+        "1/2 avocado",
+        "1/4 cup corn",
+        "2 tbsp salsa",
+        "1 tbsp lime juice"
+      ],
+      "instructions": [
+        "Cook quinoa according to package directions",
+        "Grill and slice chicken breast",
+        "Arrange quinoa in bowl",
+        "Top with beans, chicken, and vegetables",
+        "Drizzle with salsa and lime juice"
+      ],
+      "nutrition_benefits": ["High in protein", "Rich in fiber", "Complete amino acids"],
+      "dietary_tags": ["Gluten-free", "High protein", "Post-workout"],
+      "meal_type": "Lunch",
+      "best_time": "Post-workout"
+    },
+    {
+      "id": "rec002",
+      "title": "Green Energy Smoothie",
+      "category": "Pre-workout",
+      "prep_time_minutes": 5,
+      "cook_time_minutes": 0,
+      "total_time_minutes": 5,
+      "servings": 1,
+      "difficulty": "Easy",
+      "calories_per_serving": 280,
+      "protein_grams": 15,
+      "carbs_grams": 35,
+      "fat_grams": 8,
+      "fiber_grams": 6,
+      "image_url": "https://images.pexels.com/photos/616833/pexels-photo-616833.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "ingredients": [
+        "1 cup spinach",
+        "1 banana",
+        "1/2 cup mango",
+        "1 scoop protein powder",
+        "1 tbsp almond butter",
+        "1 cup almond milk",
+        "1 tsp chia seeds"
+      ],
+      "instructions": [
+        "Add all ingredients to blender",
+        "Blend until smooth",
+        "Add ice if desired consistency",
+        "Pour into glass and enjoy"
+      ],
+      "nutrition_benefits": ["Natural energy boost", "Antioxidants", "Quick absorption"],
+      "dietary_tags": ["Vegan", "Gluten-free", "Pre-workout"],
+      "meal_type": "Snack",
+      "best_time": "Pre-workout"
+    },
+    {
+      "id": "rec003",
+      "title": "Overnight Oats Parfait",
+      "category": "Breakfast",
+      "prep_time_minutes": 10,
+      "cook_time_minutes": 0,
+      "total_time_minutes": 10,
+      "servings": 1,
+      "difficulty": "Easy",
+      "calories_per_serving": 350,
+      "protein_grams": 18,
+      "carbs_grams": 52,
+      "fat_grams": 9,
+      "fiber_grams": 10,
+      "image_url": "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "ingredients": [
+        "1/2 cup rolled oats",
+        "1/2 cup Greek yogurt",
+        "1 tbsp chia seeds",
+        "1 tsp honey",
+        "1/4 cup berries",
+        "1 tbsp nuts",
+        "1/2 cup milk"
+      ],
+      "instructions": [
+        "Mix oats, milk, and chia seeds",
+        "Let sit in fridge overnight",
+        "Layer with yogurt and berries",
+        "Top with nuts and honey",
+        "Enjoy cold"
+      ],
+      "nutrition_benefits": ["Sustained energy", "Probiotics", "Heart healthy"],
+      "dietary_tags": ["Vegetarian", "High fiber", "Make-ahead"],
+      "meal_type": "Breakfast",
+      "best_time": "Morning"
+    },
+    {
+      "id": "rec004",
+      "title": "Salmon Veggie Stack",
+      "category": "Low Carb",
+      "prep_time_minutes": 20,
+      "cook_time_minutes": 15,
+      "total_time_minutes": 35,
+      "servings": 2,
+      "difficulty": "Medium",
+      "calories_per_serving": 380,
+      "protein_grams": 32,
+      "carbs_grams": 15,
+      "fat_grams": 22,
+      "fiber_grams": 6,
+      "image_url": "https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "ingredients": [
+        "2 salmon fillets",
+        "1 zucchini",
+        "1 bell pepper",
+        "1 cup broccoli",
+        "2 tbsp olive oil",
+        "1 lemon",
+        "2 cloves garlic"
+      ],
+      "instructions": [
+        "Season salmon with salt and pepper",
+        "Sauté vegetables with garlic",
+        "Grill salmon for 6-8 minutes per side",
+        "Stack vegetables and top with salmon",
+        "Drizzle with lemon and olive oil"
+      ],
+      "nutrition_benefits": ["Omega-3 fatty acids", "Anti-inflammatory", "Low carb"],
+      "dietary_tags": ["Keto-friendly", "Low carb", "High protein"],
+      "meal_type": "Dinner",
+      "best_time": "Evening"
+    }
+  ],
+  "meal_plans": [
+    {
+      "name": "Weight Loss Plan",
+      "duration_days": 7,
+      "calories_per_day": 1500,
+      "description": "Balanced nutrition for healthy weight loss",
+      "focus": "Calorie deficit with proper nutrition"
+    },
+    {
+      "name": "Muscle Gain Plan",
+      "duration_days": 7,
+      "calories_per_day": 2200,
+      "description": "High protein meals for muscle building",
+      "focus": "Protein rich foods for muscle growth"
+    }
+  ]
+}

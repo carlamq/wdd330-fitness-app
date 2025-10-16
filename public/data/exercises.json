@@ -1,0 +1,168 @@
+{
+  "featured_exercises": [
+    {
+      "id": "ex001",
+      "name": "Push-ups",
+      "category": "Strength",
+      "difficulty": "Beginner",
+      "muscle_groups": ["chest", "shoulders", "triceps"],
+      "equipment": "None",
+      "duration_minutes": 2,
+      "calories_burned": 15,
+      "instructions": [
+        "Start in plank position",
+        "Lower body until chest nearly touches floor",
+        "Push back up to starting position",
+        "Keep body straight throughout"
+      ],
+      "benefits": ["Builds upper body strength", "Improves core stability"],
+      "image_url": "https://images.pexels.com/photos/317157/pexels-photo-317157.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Keep your core engaged throughout the movement",
+      "variations": ["Knee push-ups", "Incline push-ups", "Diamond push-ups"],
+      "recommended_sets": 3,
+      "recommended_reps": "8-12",
+      "rest_time_seconds": 60
+    },
+    {
+      "id": "ex002",
+      "name": "Squats",
+      "category": "Strength",
+      "difficulty": "Beginner",
+      "muscle_groups": ["quadriceps", "glutes", "hamstrings"],
+      "equipment": "None",
+      "duration_minutes": 3,
+      "calories_burned": 20,
+      "instructions": [
+        "Stand with feet shoulder-width apart",
+        "Lower body by bending knees",
+        "Keep chest up and knees behind toes",
+        "Return to starting position"
+      ],
+      "benefits": ["Strengthens lower body", "Improves functional movement"],
+      "image_url": "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Don't let knees cave inward",
+      "variations": ["Jump squats", "Goblet squats", "Bulgarian split squats"],
+      "recommended_sets": 3,
+      "recommended_reps": "10-15",
+      "rest_time_seconds": 45
+    },
+    {
+      "id": "ex003",
+      "name": "Jumping Jacks",
+      "category": "Cardio",
+      "difficulty": "Beginner",
+      "muscle_groups": ["full body", "cardiovascular"],
+      "equipment": "None",
+      "duration_minutes": 1,
+      "calories_burned": 12,
+      "instructions": [
+        "Stand upright with legs together",
+        "Jump while raising arms overhead",
+        "Land with legs apart and arms up",
+        "Jump back to starting position"
+      ],
+      "benefits": ["Improves cardiovascular health", "Burns calories"],
+      "image_url": "https://images.pexels.com/photos/4662438/pexels-photo-4662438.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Land softly on balls of feet",
+      "variations": ["Half jacks", "Star jumps", "Cross jacks"],
+      "recommended_sets": 3,
+      "recommended_reps": "30 seconds",
+      "rest_time_seconds": 30
+    },
+    {
+      "id": "ex004",
+      "name": "Plank",
+      "category": "Core",
+      "difficulty": "Intermediate",
+      "muscle_groups": ["core", "shoulders", "back"],
+      "equipment": "None",
+      "duration_minutes": 1,
+      "calories_burned": 8,
+      "instructions": [
+        "Start in push-up position",
+        "Lower onto forearms",
+        "Keep body in straight line",
+        "Hold position"
+      ],
+      "benefits": ["Strengthens core", "Improves posture"],
+      "image_url": "https://images.pexels.com/photos/863926/pexels-photo-863926.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Don't let hips sag or pike up",
+      "variations": ["Side plank", "Plank with leg lifts", "Plank jacks"],
+      "recommended_sets": 3,
+      "recommended_reps": "30-60 seconds",
+      "rest_time_seconds": 45
+    },
+    {
+      "id": "ex005",
+      "name": "Lunges",
+      "category": "Strength",
+      "difficulty": "Intermediate",
+      "muscle_groups": ["quadriceps", "glutes", "calves"],
+      "equipment": "None",
+      "duration_minutes": 2,
+      "calories_burned": 18,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Step forward with one leg",
+        "Lower until both knees bent at 90 degrees",
+        "Push back to starting position"
+      ],
+      "benefits": ["Improves balance", "Strengthens legs unilaterally"],
+      "image_url": "https://images.pexels.com/photos/703012/pexels-photo-703012.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Keep front knee over ankle",
+      "variations": ["Reverse lunges", "Walking lunges", "Lateral lunges"],
+      "recommended_sets": 3,
+      "recommended_reps": "10 each leg",
+      "rest_time_seconds": 60
+    },
+    {
+      "id": "ex006",
+      "name": "Burpees",
+      "category": "Full Body",
+      "difficulty": "Advanced",
+      "muscle_groups": ["full body", "cardiovascular"],
+      "equipment": "None",
+      "duration_minutes": 1,
+      "calories_burned": 25,
+      "instructions": [
+        "Start standing upright",
+        "Drop into squat position",
+        "Jump feet back into plank",
+        "Jump feet back to squat and jump up"
+      ],
+      "benefits": ["Full body workout", "High calorie burn"],
+      "image_url": "https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "safety_tips": "Move at your own pace",
+      "variations": ["Half burpees", "Burpee box jumps", "Single leg burpees"],
+      "recommended_sets": 3,
+      "recommended_reps": "5-10",
+      "rest_time_seconds": 90
+    }
+  ],
+  "workout_categories": [
+    {
+      "name": "Strength Training",
+      "description": "Build muscle and increase strength",
+      "color": "#FF6B6B",
+      "icon": "💪"
+    },
+    {
+      "name": "Cardio",
+      "description": "Improve cardiovascular health",
+      "color": "#4ECDC4",
+      "icon": "❤️"
+    },
+    {
+      "name": "Core",
+      "description": "Strengthen your core muscles",
+      "color": "#45B7D1",
+      "icon": "🎯"
+    },
+    {
+      "name": "Full Body",
+      "description": "Complete body workout",
+      "color": "#96CEB4",
+      "icon": "🔥"
+    }
+  ]
+}

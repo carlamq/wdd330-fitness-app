@@ -1,11 +1,3 @@
-// Fitness App Utils - Based on SleepOutside structure
-
-// Quick selector
-export function qs(selector, parent = document) {
-  return parent.querySelector(selector);
-}
-
-// LocalStorage helpers
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
@@ -14,59 +6,24 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-// Event listeners for touch and click
-export function setClick(selector, callback) {
-  const element = qs(selector);
-  if (element) {
-    element.addEventListener("touchend", (event) => {
-      event.preventDefault();
-      callback();
-    });
-    element.addEventListener("click", callback);
-  }
-}
-
-// Get URL parameters
-export function getParam(param) {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get(param);
-}
-
-// Render lists with templates
-export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
-  const htmlStrings = list.map(template);
-  if (clear) {
-    parentElement.innerHTML = "";
-  }
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-}
-
-// Render with template
-export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.innerHTML = template;
-  if (callback) {
-    callback(data);
-  }
-}
-
-// Load template files
-export async function loadTemplate(path) {
-  const res = await fetch(path);
-  const template = await res.text();
-  return template;
-}
-
-// Load header and footer (main function)
+// Load header and footer templates
 export async function loadHeaderFooter() {
-  const header = await loadTemplate("/partials/header.html");
-  const footer = await loadTemplate("/partials/footer.html");
-  
-  const headerElement = document.querySelector("#main-header");
-  const footerElement = document.querySelector("#main-footer");
-  
-  if (headerElement) renderWithTemplate(header, headerElement);
-  if (footerElement) renderWithTemplate(footer, footerElement);
+  try {
+    const headerRes = await fetch("/partials/header.html");
+    const footerRes = await fetch("/partials/footer.html");
+    
+    const headerTemplate = await headerRes.text();
+    const footerTemplate = await footerRes.text();
+
+    const headerElement = document.querySelector("#main-header");
+    const footerElement = document.querySelector("#main-footer");
+    
+    if (headerElement) headerElement.innerHTML = headerTemplate;
+    if (footerElement) footerElement.innerHTML = footerTemplate;
+    
+  } catch (error) {
+    console.error("Error loading header/footer:", error);
+  }
 }
 
 // Alert messages for user feedback

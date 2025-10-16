@@ -1,125 +1,189 @@
-import { loadHeaderFooter } from "./utils.mjs";
-import UserProfile from "./UserProfile.mjs";
+import { loadHeaderFooter, getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
-// Load header and footer
-loadHeaderFooter();
+// Convert form data to JSON object
+function formDataToJSON(formElement) {
+    const formData = new FormData(formElement);
+    const convertedJSON = {};
+    formData.forEach((value, key) => {
+        convertedJSON[key] = value;
+    });
+    return convertedJSON;
+}
 
-const userProfile = new UserProfile();
+export default class UserProfile {
+    constructor(formSelector, summarySelector) {
+        this.formSelector = formSelector;
+        this.summarySelector = summarySelector;
+        this.userData = null;
+        this.bmiData = null;
+    }
 
-// Get form elements
-const form = document.getElementById("profile-form");
-const summary = document.getElementById("profile-summary");
-const placeholder = document.getElementById("profile-placeholder");
-const clearBtn = document.getElementById("clear-profile");
-
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    
-    // Validate
-    const validation = userProfile.validateData(data);
-    
-    if (validation.isValid) {
-        const saved = userProfile.saveProfile(data);
-        
-        if (saved) {
-            showSummary();
-            showMessage("Profile saved successfully!", "success");
-        } else {
-            showMessage("Error saving profile. Please try again.", "error");
+    init() {
+        loadHeaderFooter();
+        this.userData = getLocalStorage("userProfile");
+        this.setupEventListeners();
+        if (this.userData && this.userData.name) {
+            this.loadExistingData();
+            this.displaySummary();
         }
-    } else {
-        showMessage("Please fix these errors:\n" + validation.errors.join("\n"), "error");
     }
-});
 
-//clear button
-clearBtn.addEventListener("click", () => {
-    if (confirm("Clear all form data?")) {
-        form.reset();
-        summary.style.display = "none";
-        placeholder.style.display = "block";
+    setupEventListeners() {
+        const form = document.querySelector(this.formSelector);
+        const clearBtn = document.getElementById("clear-profile");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            this.handleSubmit(form);
+        });
+
+        clearBtn.addEventListener("click", () => {
+            this.clearProfile();
+        });
     }
-});
 
-// Show profile summary
-function showSummary() {
-    const data = userProfile.userData;
-    const summaryContent = document.getElementById("summary-content");
-    const bmiInfo = document.getElementById("bmi-info");
-    const recommendations = document.getElementById("recommendations");
-    
-    // Basic info
-    summaryContent.innerHTML = `
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Age:</strong> ${data.age} years</p>
-        <p><strong>Gender:</strong> ${data.gender}</p>
-        <p><strong>Weight:</strong> ${data.weight} kg</p>
-        <p><strong>Height:</strong> ${data.height} cm</p>
-        <p><strong>Goal:</strong> ${data.goal}</p>
-        <p><strong>Fitness Level:</strong> ${data.fitness_level}</p>
-        <p><strong>Health Conditions:</strong> ${data.health_conditions || "None"}</p>
-    `;
-    
-    // BMI calculation
-    const bmi = userProfile.calculateBMI();
-    if (bmi) {
+    handleSubmit(formElement) {
+        const formData = formDataToJSON(formElement);
+        
+        if (this.validateData(formData)) {
+            this.userData = formData;
+            this.saveProfile();
+            this.calculateBMI();
+            this.displaySummary();
+            alertMessage("Profile saved successfully!");
+        } else {
+            alertMessage("Please fill in all required fields!");
+        }
+    }
+
+    validateData(data) {
+        const required = ['name', 'age', 'gender', 'weight', 'height', 'goal', 'fitness_level'];
+        return required.every(field => data[field] && data[field].trim() !== '');
+    }
+
+    saveProfile() {
+        setLocalStorage("userProfile", this.userData);
+    }
+
+    calculateBMI() {
+        const weight = parseFloat(this.userData.weight);
+        const height = parseFloat(this.userData.height);
+        const heightInMeters = height / 100;
+        const bmi = weight / (heightInMeters * heightInMeters);
+        
+        let category = "";
+        if (bmi < 18.5) category = "Underweight";
+        else if (bmi < 25) category = "Normal weight";
+        else if (bmi < 30) category = "Overweight";
+        else category = "Obese";
+        
+        this.bmiData = {
+            value: bmi.toFixed(1),
+            category: category
+        };
+    }
+
+    displaySummary() {
+        const summary = document.querySelector(this.summarySelector);
+        const placeholder = document.getElementById("profile-placeholder");
+        const summaryContent = document.getElementById("summary-content");
+        const bmiInfo = document.getElementById("bmi-info");
+        const recommendations = document.getElementById("recommendations");
+        
+        summaryContent.innerHTML = `
+            <p><strong>Name:</strong> ${this.userData.name}</p>
+            <p><strong>Age:</strong> ${this.userData.age} years</p>
+            <p><strong>Gender:</strong> ${this.userData.gender}</p>
+            <p><strong>Weight:</strong> ${this.userData.weight} kg</p>
+            <p><strong>Height:</strong> ${this.userData.height} cm</p>
+            <p><strong>Goal:</strong> ${this.userData.goal}</p>
+            <p><strong>Fitness Level:</strong> ${this.userData.fitness_level}</p>
+            <p><strong>Health Conditions:</strong> ${this.userData.health_conditions || "None"}</p>
+        `;
+        
+        // BMI calculation
+        if (!this.bmiData) this.calculateBMI();
         bmiInfo.innerHTML = `
             <h4>BMI Information</h4>
-            <p><strong>BMI:</strong> ${bmi.value} (${bmi.category})</p>
-            <p>${getBMIDescription(bmi.category)}</p>
+            <p><strong>BMI:</strong> ${this.bmiData.value} (${this.bmiData.category})</p>
+            <p>${this.getBMIDescription(this.bmiData.category)}</p>
         `;
+        
+        // Recommendations
+        const recs = this.getRecommendations();
+        recommendations.innerHTML = `
+            <h4>Recommendations</h4>
+            <ul>
+                ${recs.map(rec => `<li>${rec}</li>`).join("")}
+            </ul>
+        `;
+        
+        summary.style.display = "block";
+        placeholder.style.display = "none";
     }
-    
-    // Recommendations
-    const recs = userProfile.getRecommendations();
-    recommendations.innerHTML = `
-        <h4>Recommendations</h4>
-        <ul>
-            ${recs.map(rec => `<li>${rec}</li>`).join("")}
-        </ul>
-    `;
-    
-    // Show summary, hide placeholder
-    summary.style.display = "block";
-    placeholder.style.display = "none";
-}
 
-// BMI descriptions
-function getBMIDescription(category) {
-    const descriptions = {
-        "Underweight": "Consider gaining weight through a balanced diet and strength training.",
-        "Normal weight": "Great! Maintain your current weight with balanced nutrition and regular exercise.",
-        "Overweight": "Consider a weight loss plan with cardio exercises and calorie management.",
-        "Obese": "Consult with a healthcare provider for a comprehensive weight management plan."
-    };
-    return descriptions[category] || "";
-}
+    getBMIDescription(category) {
+        const descriptions = {
+            "Underweight": "Consider gaining weight through a balanced diet and strength training.",
+            "Normal weight": "Great! Maintain your current weight with balanced nutrition and regular exercise.",
+            "Overweight": "Consider a weight loss plan with cardio exercises and calorie management.",
+            "Obese": "Consult with a healthcare provider for a comprehensive weight management plan."
+        };
+        return descriptions[category] || "";
+    }
 
-// Show message
-function showMessage(message) {
-    const msg = document.createElement("div");
-    msg.textContent = message;
-    
-    document.body.appendChild(msg);
-}
+    getRecommendations() {
+        const recs = [];
+        const { goal } = this.userData;
+        const { category } = this.bmiData;
+        
+        if (goal === "weight_loss") {
+            recs.push("Focus on cardio exercises");
+            recs.push("Create a calorie deficit");
+            recs.push("Drink plenty of water");
+        } else if (goal === "muscle_gain") {
+            recs.push("Include strength training");
+            recs.push("Eat protein-rich foods");
+            recs.push("Get adequate rest");
+        } else {
+            recs.push("Mix cardio and strength training");
+            recs.push("Eat a balanced diet");
+            recs.push("Stay consistent with exercise");
+        }
+        
+        if (category === "Overweight" || category === "Obese") {
+            recs.push("Consider consulting a nutritionist");
+        }
+        
+        return recs;
+    }
 
-// Load existing data
-document.addEventListener("DOMContentLoaded", () => {
-    if (userProfile.userData && userProfile.userData.name) {
-        // Fill form
-        Object.keys(userProfile.userData).forEach(key => {
+    loadExistingData() {
+        Object.keys(this.userData).forEach(key => {
             const input = document.getElementById(key);
-            if (input && userProfile.userData[key]) {
-                input.value = userProfile.userData[key];
+            if (input && this.userData[key]) {
+                input.value = this.userData[key];
             }
         });
-        
-        // Show summary
-        showSummary();
     }
-});
 
-console.log("Profile page ready!");
+    clearProfile() {
+        if (confirm("Clear all form data?")) {
+            const form = document.querySelector(this.formSelector);
+            const summary = document.querySelector(this.summarySelector);
+            const placeholder = document.getElementById("profile-placeholder");
+            
+            form.reset();
+            setLocalStorage("userProfile", null);
+            summary.style.display = "none";
+            placeholder.style.display = "block";
+            alertMessage("Profile cleared!");
+            
+            this.userData = null;
+            this.bmiData = null;
+        }
+    }
+}
+
+const userProfile = new UserProfile("#profile-form", "#profile-summary");
+userProfile.init();

@@ -11,7 +11,7 @@
 </head>
 <body>
     <header id="main-header">
-        <!-- Header content loaded by profile.js -->
+        <!-- Header -->
     </header>
 
     <main>
@@ -20,102 +20,112 @@
             <p>Tell us about yourself to get personalized recommendations</p>
         </section>
 
-        <section class="profile">
-            <form id="profile-form">
-                <h3>Personal Information</h3>
+        <section class="workout-form-section">
+            <div class="workout-form-container">
+                <h2>Personal Information</h2>
                 
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <div class="form-row">
-                    <div>
-                        <label for="age">Age:</label>
-                        <input type="number" id="age" name="age" min="13" max="100" required>
-                    </div>
-                    <div>
-                        <label for="gender">Gender:</label>
-                        <select id="gender" name="gender" required>
-                            <option value="">Select</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                <form name="profile" id="profile-form" class="workout-form">
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        
+                        <label for="name">Full Name*</label>
+                        <input type="text" id="name" name="name" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age*</label>
+                                <input type="number" id="age" name="age" min="13" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender*</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Weight (kg)*</label>
+                                <input type="number" id="weight" name="weight" min="30" max="300" step="0.1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="height">Height (cm)*</label>
+                                <input type="number" id="height" name="height" min="100" max="250" required>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Fitness Goals</legend>
+                        
+                        <label for="goal">Primary Goal*</label>
+                        <select id="goal" name="goal" required>
+                            <option value="">Select your goal</option>
+                            <option value="Lose weight">Lose Weight</option>
+                            <option value="Build muscle">Build Muscle</option>
+                            <option value="Improve overall fitness">Improve Overall Fitness</option>
+                            <option value="Maintain weight">Maintain Weight</option>
                         </select>
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div>
-                        <label for="weight">Weight (kg):</label>
-                        <input type="number" id="weight" name="weight" min="30" max="300" step="0.1" required>
-                    </div>
-                    <div>
-                        <label for="height">Height (cm):</label>
-                        <input type="number" id="height" name="height" min="100" max="250" required>
-                    </div>
-                </div>
+                        <label for="fitness_level">Current Fitness Level*</label>
+                        <select id="fitness_level" name="fitness_level" required>
+                            <option value="">Select your level</option>
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
 
-                <h3>Fitness Goals</h3>
+                        <label for="health_conditions">Health Conditions</label>
+                        <select id="health_conditions" name="health_conditions">
+                            <option value="None">None</option>
+                            <option value="Lower back pain">Lower back pain</option>
+                            <option value="Knee problems">Knee problems</option>
+                            <option value="Heart condition">Heart condition</option>
+                            <option value="Diabetes">Diabetes</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Profile</button>
+                        <button type="button" id="clear-profile" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="workout-results-section">
+            <div class="results-container">
+                <aside id="profile-summary" style="display: none;">
+                    <h3>Profile Summary</h3>
+                    <div id="summary-content"></div>
+                    <div id="bmi-info"></div>
+                    <div id="recommendations"></div>
+                    
+                    <h4>Next Steps</h4>
+                    <a href="workouts.html" class="btn-primary">Create Workout Plan</a>
+                    <a href="recipes.html" class="btn-secondary">Browse Recipes</a>
+                </aside>
                 
-                <label for="goal">Primary Goal:</label>
-                <select id="goal" name="goal" required>
-                    <option value="">Select your goal</option>
-                    <option value="Lose weight">Lose Weight</option>
-                    <option value="Build muscle">Build Muscle</option>
-                    <option value="Improve overall fitness">Improve Overall Fitness</option>
-                    <option value="Maintain weight">Maintain Weight</option>
-                </select>
-
-                <label for="fitness_level">Current Fitness Level:</label>
-                <select id="fitness_level" name="fitness_level" required>
-                    <option value="">Select your level</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                </select>
-
-                <label for="health_conditions">Health Conditions:</label>
-                <select id="health_conditions" name="health_conditions">
-                    <option value="None">None</option>
-                    <option value="Lower back pain">Lower back pain</option>
-                    <option value="Knee problems">Knee problems</option>
-                    <option value="Heart condition">Heart condition</option>
-                    <option value="Diabetes">Diabetes</option>
-                    <option value="Other">Other</option>
-                </select>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">Save Profile</button>
-                    <button type="button" id="clear-profile" class="btn-secondary">Clear Form</button>
-                </div>
-            </form>
-
-            <aside id="profile-summary" style="display: none;">
-                <h3>Profile Summary</h3>
-                <div id="summary-content"></div>
-                <div id="bmi-info"></div>
-                <div id="recommendations"></div>
-                
-                <h4>Next Steps</h4>
-                <a href="workouts.html" class="btn-primary">Create Workout Plan</a>
-                <a href="recipes.html" class="btn-secondary">Browse Recipes</a>
-            </aside>
-            
-            <aside id="profile-placeholder">
-                <span class="icon">👤</span>
-                <h3>Complete Your Profile</h3>
-                <p>Fill out the form to get personalized recommendations for your fitness journey.</p>
-                <ul>
-                    <li>✓ Get BMI calculation</li>
-                    <li>✓ Receive personalized recommendations</li>
-                    <li>✓ Access custom workout plans</li>
-                    <li>✓ Discover healthy recipes</li>
-                </ul>
-            </aside>
+                <aside id="profile-placeholder">
+                    <span class="icon">👤</span>
+                    <h3>Complete Your Profile</h3>
+                    <p>Fill out the form to get personalized recommendations for your fitness journey.</p>
+                    <ul>
+                        <li>✓ Get BMI calculation</li>
+                        <li>✓ Receive personalized recommendations</li>
+                        <li>✓ Access custom workout plans</li>
+                        <li>✓ Discover healthy recipes</li>
+                    </ul>
+                </aside>
+            </div>
         </section>
     </main>
 
-    <footer id="main-footer">
-        <!-- Footer content loaded by profile.js -->
-    </footer>
+    <div id="main-footer"></div>
 
     <script type="module" src="../js/profile.js"></script>
 </body>
