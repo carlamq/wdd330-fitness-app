@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import { ApiService } from "./ApiService.mjs";
+import ApiService from "./ApiService.mjs";
 
 // Load header and footer
 loadHeaderFooter();
