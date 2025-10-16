@@ -1,4 +1,4 @@
-class ApiService {
+export default class ApiService {
     constructor() {
         this.spoonacularUrl = "https://api.spoonacular.com/recipes";
         this.spoonacularKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
@@ -68,4 +68,3 @@ class ApiService {
     }
 }
 
-export default ApiService;
