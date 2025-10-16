@@ -1,5 +1,4 @@
-//local JSON data
-class DataService {
+export default class DataService {
     constructor() {
         this.exercisesData = null;
         this.recipesData = null;
@@ -62,5 +61,3 @@ class DataService {
         return recipes;
     }
 }
-
-export default DataService;
