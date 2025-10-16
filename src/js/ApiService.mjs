@@ -1,14 +1,14 @@
 class ApiService {
     constructor() {
         // URL for API
-        this.rapidApiUrl = 'https://ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com';
-        this.spoonacularUrl = 'https://api.spoonacular.com/recipes';
+        this.rapidApiUrl = "https://ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com";
+        this.spoonacularUrl = "https://api.spoonacular.com/recipes";
         
         // Headers for RapidAPI-AI Workout Planner
         this.rapidApiHeaders = {
-            'X-RapidAPI-Key': import.meta.env.VITE_RAPIDAPI_KEY,
-            'X-RapidAPI-Host': 'ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com',
-            'Content-Type': 'application/json'
+            "X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY,
+            "X-RapidAPI-Host": "ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com",
+            "Content-Type": "application/json"
         };
         
         // API Key Spoonacular
@@ -21,7 +21,7 @@ class ApiService {
     async generateWorkoutPlan(userData) {
         try {
             const response = await fetch(`${this.rapidApiUrl}/generateWorkoutPlan`, {
-                method: 'POST',
+                method: "POST",
                 headers: this.rapidApiHeaders,
                 body: JSON.stringify({
                     goal: userData.goal,
@@ -44,7 +44,7 @@ class ApiService {
             const data = await response.json();
             return data.result;
         } catch (error) {
-            console.error('Error generating workout plan:', error);
+            console.error("Error generating workout plan:", error);
             throw error;
         }
     }
@@ -53,7 +53,7 @@ class ApiService {
     async getExerciseDetails(exerciseName) {
         try {
             const response = await fetch(`${this.rapidApiUrl}/exerciseDetails`, {
-                method: 'POST',
+                method: "POST",
                 headers: this.rapidApiHeaders,
                 body: JSON.stringify({
                     exercise_name: exerciseName,
@@ -68,7 +68,7 @@ class ApiService {
             const data = await response.json();
             return data.result;
         } catch (error) {
-            console.error('Error getting exercise details:', error);
+            console.error("Error getting exercise details:", error);
             throw error;
         }
     }
@@ -77,7 +77,7 @@ class ApiService {
     async getNutritionAdvice(nutritionData) {
         try {
             const response = await fetch(`${this.rapidApiUrl}/nutritionAdvice`, {
-                method: 'POST',
+                method: "POST",
                 headers: this.rapidApiHeaders,
                 body: JSON.stringify({
                     goal: nutritionData.goal,
@@ -96,7 +96,7 @@ class ApiService {
             const data = await response.json();
             return data.result;
         } catch (error) {
-            console.error('Error getting nutrition advice:', error);
+            console.error("Error getting nutrition advice:", error);
             throw error;
         }
     }
@@ -105,7 +105,7 @@ class ApiService {
     async generateGoalWorkoutPlan(userData) {
         try {
             const response = await fetch(`${this.rapidApiUrl}/customWorkoutPlan`, {
-                method: 'POST',
+                method: "POST",
                 headers: this.rapidApiHeaders,
                 body: JSON.stringify({
                     goal: userData.goal,
@@ -129,7 +129,7 @@ class ApiService {
             const data = await response.json();
             return data.result;
         } catch (error) {
-            console.error('Error generating custom workout plan:', error);
+            console.error("Error generating custom workout plan:", error);
             throw error;
         }
     }
@@ -157,7 +157,7 @@ class ApiService {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error searching recipes:', error);
+            console.error("Error searching recipes:", error);
             throw error;
         }
     }
@@ -177,7 +177,7 @@ class ApiService {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error getting recipe details:', error);
+            console.error("Error getting recipe details:", error);
             throw error;
         }
     }
@@ -202,7 +202,7 @@ class ApiService {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error finding recipes by ingredients:', error);
+            console.error("Error finding recipes by ingredients:", error);
             throw error;
         }
     }
@@ -226,7 +226,7 @@ class ApiService {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error searching recipes by nutrition:', error);
+            console.error("Error searching recipes by nutrition:", error);
             throw error;
         }
     }
@@ -238,13 +238,13 @@ class ApiService {
         console.error(`API Error in ${context}:`, error);
         
         if (error.message.includes('401')) {
-            throw new Error('Invalid API key. Please check your credentials.');
+            throw new Error("Invalid API key. Please check your credentials.");
         } else if (error.message.includes('403')) {
-            throw new Error('API quota exceeded. Please try again later.');
+            throw new Error("API quota exceeded. Please try again later.");
         } else if (error.message.includes('429')) {
-            throw new Error('Too many requests. Please wait a moment and try again.');
+            throw new Error("Too many requests. Please wait a moment and try again.");
         } else {
-            throw new Error(`Service temporarily unavailable. Please try again later.`);
+            throw new Error("Service temporarily unavailable. Please try again later.");
         }
     }
 }
