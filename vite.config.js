@@ -15,6 +15,7 @@ export default defineConfig({
         recipes: resolve(__dirname, "src/pages/recipes.html"),
         workouts: resolve(__dirname, "src/pages/workouts.html"),
         favorites: resolve(__dirname, "src/pages/favorites.html"),
+        featured: resolve(__dirname, "src/pages/featured.html"),
       },
     },
   },
