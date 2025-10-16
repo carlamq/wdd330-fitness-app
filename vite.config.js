@@ -3,7 +3,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "src/",
-
+  base: "/wdd330-fitness-app/", //GitHub Pages
+  
   build: {
     outDir: "../dist",
     rollupOptions: {
