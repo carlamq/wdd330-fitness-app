@@ -118,8 +118,10 @@ export default class UserProfile {
             </ul>
         `;
         
-        summary.style.display = "block";
-        placeholder.style.display = "none";
+        summary.classList.remove("hidden");
+        summary.classList.add("visible");
+        placeholder.classList.add("hidden");
+        placeholder.classList.remove("visible");
     }
 
     getBMIDescription(category) {
@@ -175,8 +177,10 @@ export default class UserProfile {
             
             form.reset();
             setLocalStorage("userProfile", null);
-            summary.style.display = "none";
-            placeholder.style.display = "block";
+            summary.classList.add("hidden");
+            summary.classList.remove("visible");
+            placeholder.classList.remove("hidden");
+            placeholder.classList.add("visible");
             alertMessage("Profile cleared!");
             
             this.userData = null;

@@ -76,7 +76,8 @@ export default class WorkoutManager {
                 <p>This may take a moment...</p>
             </div>
         `;
-        this.workoutResults.style.display = "block";
+        this.workoutResults.classList.remove("hidden");
+        this.workoutResults.classList.add("visible");
 
         try {
             const workoutPlan = await this.workoutService.generateWorkoutPlan(formData);
