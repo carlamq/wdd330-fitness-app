@@ -1,4 +1,8 @@
+import { loadHeaderFooter } from "./utils.mjs";
 import UserProfile from "./UserProfile.mjs";
+
+// Load header and footer
+loadHeaderFooter();
 
 const userProfile = new UserProfile();
 
