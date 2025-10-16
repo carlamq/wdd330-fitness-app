@@ -36,36 +36,52 @@ header {
     top: 0;
     width: 100%;
     z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
 
-    nav {
-        max-width: 1200px;
-        margin: 0 auto;
+    .logo {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
-
-        ul {
-            list-style: none;
-            gap: 2rem;
-
-            a {
-                text-decoration: none;
-                color: var(--accent2);
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                transition: all 0.2s;
-
-                &:hover,
-                &.active {
-                    color: var(--primary-color);
-                    background: rgba(137, 176, 64, 0.1);
-                }
+        gap: 1rem;
+        
+        img {
+            height: 40px;
+            width: auto;
+        }
+        
+        a {
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            
+            .highlight {
+                color: var(--accent1);
+            }
+        }
+    }
+    
+    .nav-menu {
+        display: flex;
+        gap: 2rem;
+        
+        a {
+            text-decoration: none;
+            color: var(--accent2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+            
+            &:hover {
+                color: var(--primary-color);
+                background: rgba(137, 176, 64, 0.1);
             }
         }
     }
 }
-
 main {
     margin-top: 80px;
 }
@@ -273,4 +289,38 @@ footer {
     text-align: center;
     padding: 2rem;
     margin-top: 3rem;
+}
+
+/* Recipes page styles */
+.recipes-section {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.search-bar input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.recipe-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
