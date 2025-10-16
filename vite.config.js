@@ -3,7 +3,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: "src/",
-  base: "/", // Para Netlify
+  base: "/", //Netlify
+  publicDir: "../public", // public
 
   build: {
     outDir: "../dist",
